@@ -5,6 +5,11 @@
     <p></p>
   </div>
   <div class="panel-body">
+    <!-- search box -->
+    <div class="form-outline mt-3">
+      <input type ="search" [(ngModel)]="searchtext" id="form1 class=form-control" placeholder="Pesquisar" aria-label="search"/>
+
+    </div>
     <table class="table">
       <thead>
         <tr>
@@ -17,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let client of clients |  paginate: { itemsPerPage:5, currentPage:page, totalItems:totalLength }">
+        <tr *ngFor="let client of clients | paginate: { itemsPerPage:5, currentPage:page, totalItems:totalLength } | filter: searchtext">
           <td>{{client.id}}</td>
           <td>{{client.name}}</td>
           <td>{{client.email}}</td>

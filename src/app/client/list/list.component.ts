@@ -13,6 +13,8 @@ export class ListComponent implements OnInit {
   totalLength: any;
   page: number = 1;
 
+  searchtext: any;
+
   clients: Client[];
 
   constructor(private ClientService: ClientService,

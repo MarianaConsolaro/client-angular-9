@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClientDetailsComponent } from './client/client-details/client-details.component';
 import { UpdateClientComponent } from './client/update-client/update-client.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormComponent,
     ListComponent,
     ClientDetailsComponent,
-    UpdateClientComponent
+    UpdateClientComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
