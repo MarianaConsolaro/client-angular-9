@@ -1,7 +1,6 @@
 import { ClientService } from './../service/client.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Client } from 'src/app/model/client';
 
 @Component({
@@ -11,19 +10,25 @@ import { Client } from 'src/app/model/client';
 })
 export class ListComponent implements OnInit {
 
-  clients: Observable<Client[]>;
+  totalLength: any;
+  page: number = 1;
+
+  clients: Client[];
 
   constructor(private ClientService: ClientService,
     private router: Router) {}
 
     ngOnInit() {
-      this.reloadData();
+      this.loadAll();
     }
 
-    reloadData() {
-      this.clients = this.ClientService.getClientsList();
-    }
 
+    loadAll() {
+      this.ClientService.getClientsList()
+      .subscribe(clients => {
+        this.clients = clients;
+      });
+    }
 
     deleteClient(id: string) {
       if(confirm('Deseja realmente excluir esse cliente?')){
@@ -31,7 +36,7 @@ export class ListComponent implements OnInit {
         .subscribe(
           data => {
             console.log(data);
-            this.reloadData();
+            this.loadAll();
             alert("Cliente excluído com sucesso!");
           },
           error => console.log(error));
@@ -47,7 +52,5 @@ export class ListComponent implements OnInit {
     updateClient(id: string){
       this.router.navigate(['update', id]);
     }
-
-
 
   }
